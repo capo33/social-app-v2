@@ -36,10 +36,11 @@ interface Props {
 
 export default function Sidebar(props: Props) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
-
+  
   const { user } = useAppSelector((state) => state.auth);
+  const { savedPosts } = useAppSelector((state) => state.posts);
   const { user: userAfterUpdate } = useAppSelector((state) => state.user);
-
+ 
   const { window } = props;
 
   const dispatch = useAppDispatch();
@@ -81,7 +82,11 @@ export default function Sidebar(props: Props) {
     },
     {
       label: "Saved",
-      icon: <BookmarkIcon sx={{ fontSize: 30 }} />,
+      icon: (
+        <Badge badgeContent={savedPosts?.length} color='error'>
+          <BookmarkIcon sx={{ fontSize: 30 }} />
+        </Badge>
+      ),
       path: "/savedPosts",
     },
     {
