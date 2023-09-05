@@ -1,4 +1,6 @@
 import * as React from "react";
+import { Link, useNavigate } from "react-router-dom";
+
 // Material UI
 import {
   Box,
@@ -11,6 +13,7 @@ import {
   ListItemIcon,
   ListItemText,
   Avatar,
+  Badge,
 } from "@mui/material";
 
 // Material UI Icons
@@ -21,10 +24,9 @@ import BookmarkIcon from "@mui/icons-material/Bookmark";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 
-import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../redux/fetures/Auth/authSlice";
-import { useAppSelector, useAppDispatch } from "../../redux/app/store";
 import { userProfile } from "../../redux/fetures/User/userSlice";
+import { useAppSelector, useAppDispatch } from "../../redux/app/store";
 
 const drawerWidth = 240;
 
@@ -67,7 +69,14 @@ export default function Sidebar(props: Props) {
     },
     {
       label: "Notifications",
-      icon: <NotificationsIcon sx={{ fontSize: 30 }} />,
+      icon: (
+        <Badge
+          badgeContent={userAfterUpdate?.notifications?.length}
+          color='error'
+        >
+          <NotificationsIcon />
+        </Badge>
+      ),
       path: "/notifications",
     },
     {
