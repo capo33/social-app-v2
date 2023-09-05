@@ -16,6 +16,7 @@ import {
   Avatar,
   IconButton,
   Stack,
+  Chip,
 } from "@mui/material";
 
 // Material UI Icons
@@ -37,12 +38,16 @@ import {
 import { formatDate } from "../../utils/Index";
 import { useAppDispatch, useAppSelector } from "../../redux/app/store";
 import { CommentInput } from "../../components/Index";
- 
+
 export default function Home() {
-  const { posts } = useAppSelector((state) => state.posts);
+  const { posts, savedPosts } = useAppSelector((state) => state.posts);
   const { user } = useAppSelector((state) => state.auth);
 
   const dispatch = useAppDispatch();
+
+  const postIds = savedPosts.map((post) => post._id);
+  console.log(postIds);
+
   const token = user?.token as string;
 
   useEffect(() => {
@@ -121,12 +126,14 @@ export default function Home() {
                   />
 
                   {/* Image */}
-                  <CardMedia
-                    component='img'
-                    height='194'
-                    image={post?.image}
-                    alt={post?.title}
-                  />
+                  <Link to={`/${post?.title}/${post?._id}`}>
+                    <CardMedia
+                      component='img'
+                      height='194'
+                      image={post?.image}
+                      alt={post?.title}
+                    />
+                  </Link>
                   <CardContent>
                     <Typography variant='body2' color='text.secondary'>
                       {post?.description}
@@ -158,9 +165,23 @@ export default function Home() {
                       )}
                     </CardActions>
                     <CardActions disableSpacing>
-                      <IconButton aria-label='Save'>
-                        <BookmarkBorderIcon />
-                      </IconButton>
+                      {/* {postIds.includes(post?._id!) ? (
+                        <IconButton aria-label='unsave'>
+                          <Chip
+                            label='Unsaved'
+                            variant='outlined'
+                            color='warning'
+                          />
+                        </IconButton>
+                      ) : (
+                        <IconButton aria-label='save'>
+                          <Chip
+                            label='Save'
+                            variant='outlined'
+                            color='primary'
+                          />
+                        </IconButton>
+                      )} */}
                     </CardActions>
                   </Stack>
 

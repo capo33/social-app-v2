@@ -4,8 +4,15 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
+
+import {
+  Profile,
+  UpdateProfile,
+  UserProfile,
+  Notifications,
+} from "../pages/User/Index";
 import { Home, AddPost } from "../pages/home/Index";
-import { Profile, UpdateProfile, UserProfile } from "../pages/User/Index";
+import { PostDetails, SavedPosts } from "../pages/post/Index";
 import { ForgotPassword, Login, Register } from "../pages/auth/Index";
 
 const routes = createBrowserRouter(
@@ -19,6 +26,9 @@ const routes = createBrowserRouter(
       <Route path='create-post' element={<AddPost />} />
       <Route path='update-profile' element={<UpdateProfile />} />
       <Route path='profile/:id' element={<UserProfile />} />
+      <Route path='notifications' element={<Notifications />} />
+      <Route path='savedPosts' element={<SavedPosts />} />
+      <Route path=':title/:id' element={<PostDetails />} />
     </Route>
   )
 );

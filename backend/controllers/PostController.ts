@@ -309,14 +309,6 @@ const unsavePost = async (req: Request, res: Response): Promise<void> => {
       throw new Error("Post not found");
     }
 
-    // Check if the user has already saved the post
-    const isSaved = user?.savedPosts?.includes(post._id);
-
-    if (isSaved) {
-      res.status(400);
-      throw new Error("Post already saved");
-    }
-
     await UserModel.findByIdAndUpdate(
       req?.body.userId,
       {
@@ -350,7 +342,7 @@ const getSavedPosts = async (req: Request, res: Response): Promise<void> => {
       .populate("postedBy", "_id name")
       .populate("comments.postedBy", "_id name");
 
-    res.status(200).json({savedPosts});
+    res.status(200).json({ savedPosts });
   } catch (error) {
     if (error instanceof Error)
       res.status(400).json({ message: error.message });

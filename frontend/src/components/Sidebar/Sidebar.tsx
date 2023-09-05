@@ -82,7 +82,7 @@ export default function Sidebar(props: Props) {
     {
       label: "Saved",
       icon: <BookmarkIcon sx={{ fontSize: 30 }} />,
-      path: "/saved",
+      path: "/savedPosts",
     },
     {
       label: "Create Post",
