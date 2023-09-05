@@ -123,7 +123,7 @@ const savePost = async (postId: string, userId: string, token: string) => {
     }
   );
 
-  return response.data;
+  return response.data?.savedPosts;
 };
 
 // Unsaved Posts
@@ -138,7 +138,7 @@ const unsavePost = async (postId: string, userId: string, token: string) => {
     }
   );
 
-  return response.data;
+  return response.data?.savedPosts;
 };
 
 // Get saved posts
@@ -148,7 +148,7 @@ const getSavedPosts = async (userId: string, token: string) => {
       Authorization: `Bearer ${token}`,
     },
   });
-  return response.data;
+  return response.data.savedPosts
 };
 
 const postServices = {

@@ -279,6 +279,8 @@ export const savePost = createAsyncThunk(
     try {
       const response = await postServices.savePost(postId, userId, token);
       thunkAPI.dispatch(getAllPosts());
+      thunkAPI.dispatch(getSavedPosts({ userId, token }));
+
       return response;
     } catch (error: unknown | any) {
       const message =
@@ -306,6 +308,8 @@ export const unsavePost = createAsyncThunk(
     try {
       const response = await postServices.unsavePost(postId, userId, token);
       thunkAPI.dispatch(getAllPosts());
+      thunkAPI.dispatch(getSavedPosts({ userId, token }));
+
       return response;
     } catch (error: unknown | any) {
       const message =
@@ -510,13 +514,7 @@ const postSlice = createSlice({
     builder.addCase(savePost.fulfilled, (state, { payload }) => {
       state.isLoading = false;
       state.isSuccess = true;
-      const newdata = state.posts.map((post: IPost) => {
-        if (post?._id === payload?.data?._id) {
-          return payload?.data;
-        }
-        return post;
-      });
-      state.savedPosts = newdata;
+      payload as IPost[];
     });
     builder.addCase(savePost.rejected, (state, { payload }) => {
       state.isLoading = false;
@@ -531,15 +529,24 @@ const postSlice = createSlice({
     builder.addCase(unsavePost.fulfilled, (state, { payload }) => {
       state.isLoading = false;
       state.isSuccess = true;
-      const newdata = state.posts.map((post: IPost) => {
-        if (post?._id === payload?.data?._id) {
-          return payload?.data;
-        }
-        return post;
-      });
-      state.savedPosts = newdata;
+      state.savedPosts = payload as IPost[];
     });
     builder.addCase(unsavePost.rejected, (state, { payload }) => {
+      state.isLoading = false;
+      state.isError = true;
+      state.message = payload as string;
+    });
+
+    // get saved posts
+    builder.addCase(getSavedPosts.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getSavedPosts.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+      state.isSuccess = true;
+      state.savedPosts = payload;
+    });
+    builder.addCase(getSavedPosts.rejected, (state, { payload }) => {
       state.isLoading = false;
       state.isError = true;
       state.message = payload as string;

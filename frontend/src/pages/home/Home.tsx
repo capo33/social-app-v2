@@ -165,23 +165,19 @@ export default function Home() {
                       )}
                     </CardActions>
                     <CardActions disableSpacing>
-                      {/* {postIds.includes(post?._id!) ? (
-                        <IconButton aria-label='unsave'>
+                      {postIds.includes(post?._id!) ? (
+                        <IconButton aria-label='saved'>
                           <Chip
-                            label='Unsaved'
+                            label='Saved'
                             variant='outlined'
                             color='warning'
                           />
                         </IconButton>
                       ) : (
-                        <IconButton aria-label='save'>
-                          <Chip
-                            label='Save'
-                            variant='outlined'
-                            color='primary'
-                          />
+                        <IconButton aria-label='unsaved'>
+                          <Chip label='Unsaved' variant='outlined' />
                         </IconButton>
-                      )} */}
+                      )}
                     </CardActions>
                   </Stack>
 
