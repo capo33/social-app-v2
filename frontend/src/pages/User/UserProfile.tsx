@@ -14,13 +14,13 @@ import {
 } from "@mui/material";
 
 // Material Icon
-
 import {
   followUser,
   unfollowUser,
   userProfile,
   userProfileById,
 } from "../../redux/fetures/User/userSlice";
+
 import { getAllPosts } from "../../redux/fetures/Post/postSlice";
 import { useAppSelector, useAppDispatch } from "../../redux/app/store";
 
@@ -41,13 +41,11 @@ function UserProfile() {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(userProfileById(id as string));
+    id && dispatch(userProfileById(id as string));
   }, [dispatch, id]);
 
   useEffect(() => {
-    if (user) {
-      dispatch(userProfile(user?.token as string));
-    }
+    user && dispatch(userProfile(user?.token as string));
   }, [dispatch, user]);
 
   // Like post
@@ -99,7 +97,7 @@ function UserProfile() {
               mr: 3,
             }}
           />
-          <Box component={'div'}>
+          <Box component={"div"}>
             <Typography variant='h5'>{guest?.user?.username}</Typography>
             <Typography variant='body1'>@{guest?.user?.username}</Typography>
 
@@ -123,7 +121,7 @@ function UserProfile() {
             )}
           </Box>
         </Box>
-        
+
         <Typography variant='body2' sx={{ mb: 1 }}>
           {guest?.user?.bio ? `Bio: ${guest?.user?.bio}` : "No Bio"}
         </Typography>

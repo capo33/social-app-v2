@@ -35,9 +35,7 @@ function Profile() {
   }, [dispatch]);
 
   useEffect(() => {
-    if (user) {
-      dispatch(userProfile(token));
-    }
+    user && dispatch(userProfile(token));
   }, [dispatch, user, token]);
 
   return (

@@ -39,10 +39,8 @@ const UpdateProfile = () => {
   const token = user?.token as string;
 
   useEffect(() => {
-    if (token) {
-      dispatch(userProfile(token));
-    }
-  }, [dispatch, token]);
+    user && dispatch(userProfile(token));
+  }, [dispatch, user, token]);
 
   useEffect(() => {
     if (me) {
