@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 
 // Material UI
-import { Box, IconButton, TextField, Typography } from "@mui/material";
+import { Box, IconButton, TextField, Typography, Tooltip } from "@mui/material";
+
 // Material UI Icons
-import DeleteForeverIcon from "@mui/icons-material/Delete";
 import SendIcon from "@mui/icons-material/Send";
+import DeleteForeverIcon from "@mui/icons-material/Delete";
 
 import { IPost } from "../../interfaces/PostInterface";
 import { CommentModal } from "../Index";
+import { useAppSelector } from "../../redux/app/store";
 
 type CommentInputProps = {
   post: IPost;
@@ -21,9 +23,13 @@ const CommentInput = ({
   handleDeleteComment,
 }: CommentInputProps) => {
   const [inputValue, setInputValue] = useState<string>("");
+  const { user } = useAppSelector((state) => state.auth);
+  console.log(user);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
+  console.log(post);
 
   return (
     <Box>
@@ -36,17 +42,25 @@ const CommentInput = ({
           value={inputValue}
           onChange={handleChange}
         />
-        <IconButton
-          type='button'
-          sx={{ p: "10px" }}
-          aria-label='search'
-          onClick={() => {
-            handleComment(inputValue, post._id);
-            setInputValue("");
-          }}
-        >
-          <SendIcon />
-        </IconButton>
+        {!user ? (
+          <Tooltip title='Please loging to comment on this post'>
+            <IconButton>
+              <SendIcon sx={{ color: "black" }} />
+            </IconButton>
+          </Tooltip>
+        ) : (
+          <IconButton
+            type='button'
+            sx={{ p: "10px" }}
+            aria-label='search'
+            onClick={() => {
+              handleComment(inputValue, post._id);
+              setInputValue("");
+            }}
+          >
+            <SendIcon sx={{ color: "black" }} />
+          </IconButton>
+        )}
       </Box>
 
       <CommentModal post={post} handleDeleteComment={handleDeleteComment} />
