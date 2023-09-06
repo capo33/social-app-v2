@@ -78,8 +78,31 @@ export const userProfileById = createAsyncThunk(
   }
 );
 
-// Follow user
+// Delete user profile
+export const deleteUserProfile = createAsyncThunk(
+  "auth/deleteUserProfile",
+  async (
+    { token, toast, navigate }: { token: string; toast: any; navigate: any },
+    { rejectWithValue }
+  ) => {
+    try {
+      const response = await userServices.deleteUserProfile(token);
+      toast(response.message, { type: "success" });
+      navigate("/login");
+      return response;
+    } catch (error: unknown | any) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return rejectWithValue(message);
+    }
+  }
+);
 
+// Follow user
 export const followUser = createAsyncThunk(
   "auth/followUser",
   async (
@@ -109,7 +132,6 @@ export const followUser = createAsyncThunk(
 );
 
 // Unfollow user
-
 export const unfollowUser = createAsyncThunk(
   "auth/unfollowUser",
   async (
@@ -202,6 +224,21 @@ export const userSlice = createSlice({
       state.guest = payload;
     });
     builder.addCase(userProfileById.rejected, (state, { payload }) => {
+      state.isLoading = false;
+      state.isError = true;
+      state.message = payload as string;
+    });
+
+    // Delete user profile
+    builder.addCase(deleteUserProfile.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(deleteUserProfile.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+      state.isSuccess = true;
+      state.user = payload;
+    });
+    builder.addCase(deleteUserProfile.rejected, (state, { payload }) => {
       state.isLoading = false;
       state.isError = true;
       state.message = payload as string;
