@@ -34,7 +34,7 @@ function Profile() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const owenPosts = posts.filter((post) => post?.postedBy?._id === user?._id);
+  const owenPosts = posts?.filter((post) => post?.postedBy?._id === user?._id);
   const token = user?.token as string;
 
   useEffect(() => {

@@ -43,11 +43,13 @@ import { CommentInput } from "../../components/Index";
 export default function Home() {
   const { posts, savedPosts } = useAppSelector((state) => state.posts);
   const { user } = useAppSelector((state) => state.auth);
+  const { user: me } = useAppSelector((state) => state.user);
+  console.log(posts);
 
   const dispatch = useAppDispatch();
 
   const postIds = savedPosts.map((post) => post._id);
-  console.log(postIds);
+  console.log(posts);
 
   const token = user?.token as string;
 
@@ -88,14 +90,14 @@ export default function Home() {
           Social Network <PublicIcon sx={{ fontSize: 40 }} />
         </Typography>
       </Box>
-      {posts.length === 0 && (
+      {posts && posts?.length === 0 && (
         <Alert variant='outlined' severity='info'>
           No posts yet
         </Alert>
       )}
       <Grid container spacing={4}>
         {posts &&
-          posts.map((post) => {
+          posts?.map((post) => {
             const postId = post?._id;
 
             return (
@@ -111,9 +113,11 @@ export default function Home() {
                             : "/profile"
                         }
                       >
-                        <Avatar sx={{ bgcolor: red[500] }} aria-label='recipe'>
-                          {post?.postedBy?.image}
-                        </Avatar>
+                        <Avatar
+                          sx={{ bgcolor: red[500] }}
+                          aria-label='post'
+                          src={post?.postedBy?.image}
+                        />
                       </Link>
                     }
                     action={
@@ -123,7 +127,7 @@ export default function Home() {
                             dispatch(deletePost({ postId, token, toast }))
                           }
                         >
-                          <DeleteForeverIcon />
+                          <DeleteForeverIcon sx={{ color: "black" }} />
                         </IconButton>
                       )
                     }

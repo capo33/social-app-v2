@@ -96,7 +96,7 @@ export default function Main(props: MainProps) {
       </Typography>
       <Divider />
       <Typography variant='h6' gutterBottom>
-        {post}
+        {post && post}
       </Typography>
     </Grid>
   );

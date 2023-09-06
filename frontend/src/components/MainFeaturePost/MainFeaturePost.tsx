@@ -55,7 +55,7 @@ export default function MainFeaturePost({ image, title }: FeaturedPostProps) {
                 textAlign: "center",
               }}
             >
-              {title}
+              {title && title}
             </Typography>
           </Box>
         </Grid>

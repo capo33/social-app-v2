@@ -21,7 +21,7 @@ const PostDetails = () => {
     <Container maxWidth='lg'>
       <MainFeaturePost image={post?.image} title={post?.title} />
       <Grid container spacing={5} sx={{ mt: 3 }}>
-        <Main description='Description' post={post.description} />
+        <Main description='Description' post={post?.description} />
       </Grid>
     </Container>
   );

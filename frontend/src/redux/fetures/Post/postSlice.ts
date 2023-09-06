@@ -95,10 +95,10 @@ export const createPost = createAsyncThunk(
     try {
       const response = await postServices.createPost(formData, token);
       toast.success(response.message);
+
       return response;
     } catch (error: unknown | any) {
       toast.error(error.response.data.message);
-      console.log(error.response.data.message);
 
       const message =
         (error.response &&
@@ -230,7 +230,6 @@ export const deleteCommentPost = createAsyncThunk(
         token
       );
       thunkAPI.dispatch(getAllPosts());
-      console.log("response", response);
 
       return response;
     } catch (error: unknown | any) {
@@ -385,7 +384,7 @@ const postSlice = createSlice({
     builder.addCase(createPost.fulfilled, (state, { payload }) => {
       state.isLoading = false;
       state.isSuccess = true;
-      state.posts = payload.data;
+      state.post = payload.data;
     });
     builder.addCase(createPost.rejected, (state, { payload }) => {
       state.isLoading = false;

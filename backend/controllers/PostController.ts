@@ -9,7 +9,7 @@ import UserModel from "../models/User";
 const getPosts = async (req: Request, res: Response): Promise<void> => {
   try {
     const posts = await PostModel.find({})
-      .populate("postedBy", "_id username")
+      .populate("postedBy", "_id username image")
       .populate("comments.postedBy", "_id username")
       .sort({ date: -1 });
 
@@ -52,7 +52,7 @@ const createPost = async (req: Request, res: Response): Promise<void> => {
   try {
     const { title, description, image, tags } = req.body;
 
-    if (!title || !description || !image) {
+    if (!title || !description || !tags || !image) {
       res.status(422);
       throw new Error("Please add all the fields");
     }
@@ -67,7 +67,7 @@ const createPost = async (req: Request, res: Response): Promise<void> => {
 
     res.status(201).json({
       message: "Post created successfully",
-      result: post,
+       post,
     });
   } catch (error) {
     if (error instanceof Error)

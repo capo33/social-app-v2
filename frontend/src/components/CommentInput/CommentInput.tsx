@@ -24,12 +24,10 @@ const CommentInput = ({
 }: CommentInputProps) => {
   const [inputValue, setInputValue] = useState<string>("");
   const { user } = useAppSelector((state) => state.auth);
-  console.log(user);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
-  console.log(post);
 
   return (
     <Box>
@@ -89,7 +87,7 @@ const CommentInput = ({
                 aria-label='delete'
                 onClick={() => handleDeleteComment(post._id, comment._id)}
               >
-                <DeleteForeverIcon />
+                <DeleteForeverIcon color='error' fontSize='small' />
               </IconButton>
             </Box>
           ))}

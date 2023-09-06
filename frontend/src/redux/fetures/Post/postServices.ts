@@ -6,6 +6,7 @@ import { IPostCreate } from "../../../interfaces/PostInterface";
 // Get all posts
 const getPosts = async () => {
   const response = await axios.get(POST_URL);
+
   return response.data;
 };
 
@@ -32,7 +33,6 @@ const deletePost = async (postId: string, token: string) => {
       Authorization: `Bearer ${token}`,
     },
   });
-  console.log(response.data);
 
   return response.data;
 };
@@ -148,7 +148,7 @@ const getSavedPosts = async (userId: string, token: string) => {
       Authorization: `Bearer ${token}`,
     },
   });
-  return response.data.savedPosts
+  return response.data.savedPosts;
 };
 
 const postServices = {
