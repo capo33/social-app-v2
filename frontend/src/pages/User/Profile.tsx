@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link , useNavigate} from "react-router-dom";
+import { toast } from "react-hot-toast";
 // Material Ui
 import {
   Box,
@@ -17,7 +18,7 @@ import {
 import SettingsIcon from "@mui/icons-material/Settings";
  import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
-import { userProfile } from "../../redux/fetures/User/userSlice";
+import { deleteUserProfile, userProfile } from "../../redux/fetures/User/userSlice";
 import { getAllPosts } from "../../redux/fetures/Post/postSlice";
 import { useAppSelector, useAppDispatch } from "../../redux/app/store";
 
@@ -27,6 +28,7 @@ function Profile() {
   const { user: me } = useAppSelector((state) => state.user);
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const owenPosts = posts.filter((post) => post?.postedBy?._id === user?._id);
   const token = user?.token as string;
@@ -39,6 +41,14 @@ function Profile() {
     user && dispatch(userProfile(token));
   }, [dispatch, user, token]);
 
+  // Delete user
+  const handleDelete = () => {
+    dispatch(deleteUserProfile({
+      token,
+      toast,
+      navigate,
+    }));
+  };
   return (
     <Container sx={{ my: 10 }}>
       <CardContent
@@ -79,7 +89,7 @@ function Profile() {
                 <SettingsIcon />
               </Button>
             </Link>
-            <Button variant='contained' color='error'  >
+            <Button variant='contained' color='error' onClick={handleDelete}>
               <DeleteForeverIcon />
             </Button>
           </Box>
