@@ -37,19 +37,16 @@ import {
   unlikePost,
 } from "../../redux/fetures/Post/postSlice";
 import { formatDate } from "../../utils/Index";
-import { useAppDispatch, useAppSelector } from "../../redux/app/store";
 import { CommentInput } from "../../components/Index";
+import { useAppDispatch, useAppSelector } from "../../redux/app/store";
 
 export default function Home() {
   const { posts, savedPosts } = useAppSelector((state) => state.posts);
   const { user } = useAppSelector((state) => state.auth);
-  const { user: me } = useAppSelector((state) => state.user);
-  console.log(posts);
 
   const dispatch = useAppDispatch();
 
-  const postIds = savedPosts.map((post) => post._id);
-  console.log(posts);
+  const postIds = savedPosts?.map((post) => post._id);
 
   const token = user?.token as string;
 
@@ -90,7 +87,7 @@ export default function Home() {
           Social Network <PublicIcon sx={{ fontSize: 40 }} />
         </Typography>
       </Box>
-      {posts && posts?.length === 0 && (
+      {posts?.length === 0 && (
         <Alert variant='outlined' severity='info'>
           No posts yet
         </Alert>

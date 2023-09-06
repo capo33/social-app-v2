@@ -12,6 +12,7 @@ import {
   CardContent,
   Divider,
   Tooltip,
+  Alert,
 } from "@mui/material";
 
 // Material Icon
@@ -164,7 +165,13 @@ function UserProfile() {
         <Divider style={{ margin: "20px 0", color: "black" }} />
 
         {guest?.posts?.length === 0 && (
-          <h2 style={{ textAlign: "center" }}>No posts yet</h2>
+          <Alert
+            variant='outlined'
+            severity='info'
+            sx={{ textAlign: "center" }}
+          >
+            No posts yet
+          </Alert>
         )}
 
         <Grid container spacing={2}>

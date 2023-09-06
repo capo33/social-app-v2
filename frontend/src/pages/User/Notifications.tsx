@@ -40,15 +40,6 @@ const Notifications = () => {
             <Table stickyHeader aria-label='sticky table'>
               <TableHead>
                 <TableRow>
-                  {/* {user?.notifications?.map((notification) => (
-                  <TableCell
-                    key={notification._id}
-                    align={"left"}
-                    style={{ minWidth: 170 }}
-                  >
-                    {notification.title}
-                  </TableCell>
-                ))} */}
                   <TableCell
                     align={"left"}
                     style={{ minWidth: 170, textAlign: "center" }}
@@ -68,7 +59,7 @@ const Notifications = () => {
                     >
                       <TableCell align={"left"} style={{ minWidth: 170 }}>
                         <Link to={`/profile/${notification._id}`}>
-                          {notification.description}
+                          {notification.description && notification.description}
                         </Link>
                       </TableCell>
                     </TableRow>

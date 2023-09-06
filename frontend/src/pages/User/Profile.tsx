@@ -34,8 +34,8 @@ function Profile() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const owenPosts = posts?.filter((post) => post?.postedBy?._id === user?._id);
   const token = user?.token as string;
+  const owenPosts = posts?.filter((post) => post?.postedBy?._id === user?._id);
 
   useEffect(() => {
     dispatch(getAllPosts());
@@ -137,6 +137,7 @@ function Profile() {
         )}
 
         <Grid container spacing={2}>
+          {}
           {owenPosts &&
             owenPosts?.map((post) => (
               <Grid item xs={12} sm={6} md={4} key={post._id}>
