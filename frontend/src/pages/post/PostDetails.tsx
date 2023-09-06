@@ -14,7 +14,7 @@ const PostDetails = () => {
   const dispatch = useAppDispatch();
 
   React.useEffect(() => {
-    dispatch(getPostById(id as string));
+    id && dispatch(getPostById(id as string));
   }, [dispatch, id]);
 
   return (

@@ -23,7 +23,7 @@ const SavedPosts = () => {
   const token = user?.token as string;
 
   useEffect(() => {
-    dispatch(getSavedPosts({ userId: user?._id as string, token }));
+    token && dispatch(getSavedPosts({ userId: user?._id as string, token }));
   }, [dispatch, user?._id, token]);
 
   return (
