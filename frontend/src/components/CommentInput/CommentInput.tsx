@@ -64,9 +64,9 @@ const CommentInput = ({
       <CommentModal post={post} handleDeleteComment={handleDeleteComment} />
 
       {/* Show first two comments */}
-      {post?.comments.length > 0 && (
+      {post?.comments?.length > 0 && (
         <>
-          {post.comments.slice(0, 2).map((comment: any) => (
+          {post?.comments?.slice(0, 2)?.map((comment: any) => (
             <Box
               key={comment._id}
               sx={{
@@ -83,12 +83,15 @@ const CommentInput = ({
                 </span>
                 {comment.comment}
               </Typography>
-              <IconButton
-                aria-label='delete'
-                onClick={() => handleDeleteComment(post._id, comment._id)}
-              >
-                <DeleteForeverIcon color='error' fontSize='small' />
-              </IconButton>
+              {/* here i show the delete button depending on postedBy */}
+              {post?.postedBy?._id !== user?._id && (
+                <IconButton
+                  aria-label='delete'
+                  onClick={() => handleDeleteComment(post._id, comment._id)}
+                >
+                  <DeleteForeverIcon color='error' fontSize='small' />
+                </IconButton>
+              )}
             </Box>
           ))}
         </>
