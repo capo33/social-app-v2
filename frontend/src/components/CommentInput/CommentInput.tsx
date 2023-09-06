@@ -25,6 +25,9 @@ const CommentInput = ({
   const [inputValue, setInputValue] = useState<string>("");
   const { user } = useAppSelector((state) => state.auth);
 
+  console.log("user", user);
+  console.log("post", post);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
@@ -84,14 +87,14 @@ const CommentInput = ({
                 {comment.comment}
               </Typography>
               {/* here i show the delete button depending on postedBy */}
-              {post?.postedBy?._id !== user?._id && (
+              {comment?.postedBy?._id === user?._id ? (
                 <IconButton
                   aria-label='delete'
                   onClick={() => handleDeleteComment(post._id, comment._id)}
                 >
                   <DeleteForeverIcon color='error' fontSize='small' />
                 </IconButton>
-              )}
+              ) : null}
             </Box>
           ))}
         </>
