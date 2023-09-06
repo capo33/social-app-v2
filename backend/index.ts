@@ -30,6 +30,12 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cookieParser());
 
+
+// Routes
+app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/users", userRoutes);
+app.use("/api/v1/posts", postrRoutes);
+
 // Make uploads folder static
 if (process.env.NODE_ENV === "production") {
   const __dirname: string = path.resolve();
@@ -47,12 +53,6 @@ if (process.env.NODE_ENV === "production") {
     });
   });
 }
-
-// Routes
-
-app.use("/api/v1/auth", authRoutes);
-app.use("/api/v1/users", userRoutes);
-app.use("/api/v1/posts", postrRoutes);
 
 // Error handler middleware
 app.use(notFound);
