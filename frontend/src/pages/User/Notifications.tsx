@@ -29,7 +29,7 @@ const Notifications = () => {
   }, [dispatch, token]);
 
   return (
-    <Container sx={{ my: 4 }}>
+    <Container maxWidth='lg' sx={{ my: 10 }}>
       <Typography variant='h4'>Notifications</Typography>
       {user?.notifications?.length === 0 && (
         <Alert severity='success'>You have no notifications</Alert>

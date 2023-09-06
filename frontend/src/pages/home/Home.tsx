@@ -17,6 +17,7 @@ import {
   IconButton,
   Stack,
   Chip,
+  Alert,
 } from "@mui/material";
 
 // Material UI Icons
@@ -86,6 +87,11 @@ export default function Home() {
           Social Network <PublicIcon sx={{ fontSize: 40 }} />
         </Typography>
       </Box>
+        {posts.length === 0 && (
+          <Alert variant='outlined' severity='info'>
+            No posts yet
+          </Alert>
+        )}
       <Grid container spacing={4}>
         {posts &&
           posts.map((post) => {

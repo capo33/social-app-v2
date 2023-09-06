@@ -27,7 +27,7 @@ const SavedPosts = () => {
   }, [dispatch, user?._id, token]);
 
   return (
-    <Container>
+    <Container maxWidth='lg' sx={{ my: 10 }}>
       <Typography variant='h4' sx={{ mt: 3 }}>
         Saved Posts
       </Typography>

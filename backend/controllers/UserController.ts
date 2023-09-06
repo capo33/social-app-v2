@@ -96,7 +96,8 @@ const deleteUser = async (req: Request, res: Response): Promise<void> => {
 
     // Delete user
     await UserModel.findByIdAndDelete(req.user?._id);
-
+    await PostModel.deleteMany({ postedBy: req.user?._id });
+    
     res.status(200).json({
       success: true,
       message: "Sad to see you go, user deleted successfully",

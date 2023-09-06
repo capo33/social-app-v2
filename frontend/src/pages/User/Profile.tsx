@@ -15,6 +15,7 @@ import {
 
 // Material Icon
 import SettingsIcon from "@mui/icons-material/Settings";
+ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 import { userProfile } from "../../redux/fetures/User/userSlice";
 import { getAllPosts } from "../../redux/fetures/Post/postSlice";
@@ -43,18 +44,12 @@ function Profile() {
       <CardContent
         sx={{
           display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+          alignItems: "flex-start",
+          justifyContent: "space-between",
           flexDirection: "column",
         }}
       >
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
+        <Box>
           <Avatar
             src={me?.image}
             alt={me?.username}
@@ -65,18 +60,32 @@ function Profile() {
               mr: 3,
             }}
           />
-          <div>
-            <Typography variant='h5'>{me?.username}</Typography>
-            <Typography variant='body1'>@{me?.username}</Typography>
 
+          <Typography variant='h5' sx={{ my: 2 }}>
+            {me?.username}
+          </Typography>
+          <Typography variant='body1' sx={{ my: 2 }}>
+            @{me?.username}
+          </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
             <Link to='/update-profile'>
-              <Button variant='contained' color='info'>
+              <Button variant='contained' color='info' fullWidth>
                 <SettingsIcon />
               </Button>
             </Link>
-          </div>
+            <Button variant='contained' color='error'  >
+              <DeleteForeverIcon />
+            </Button>
+          </Box>
         </Box>
-        <Typography variant='body2' sx={{ mb: 1 }}>
+
+        <Typography variant='body1' sx={{ my: 2 }}>
           {me?.bio ? `Bio: ${me?.bio}` : "No Bio"}
         </Typography>
         <Typography
@@ -117,7 +126,7 @@ function Profile() {
                 <Card>
                   <img
                     src={post.image}
-                    alt={`Post ${post._id}`}
+                    alt={post.title}
                     style={{ width: "100%", height: "auto" }}
                   />
                   <CardContent>
