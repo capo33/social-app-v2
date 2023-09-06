@@ -17,5 +17,6 @@ router.delete(
   protect,
   UserController.deleteNotification
 );
+router.delete("/delete-profile", protect, UserController.deleteUser);
 
 export default router;

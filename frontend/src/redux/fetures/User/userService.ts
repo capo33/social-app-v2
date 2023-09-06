@@ -30,6 +30,16 @@ const getUserProfileById = async (id: string) => {
   return response.data;
 };
 
+// delete user profile
+const deleteUserProfile = async (token: string) => {
+  const response = await axios.delete(`${USER_URL}/delete-profile`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
+};
+
 // follow a user
 const followUser = async (followId: string, userId: string, token: string) => {
   const response = await axios.put(
@@ -79,6 +89,7 @@ const userService = {
   getUserProfile,
   updateUserProfile,
   getUserProfileById,
+  deleteUserProfile,
   followUser,
   unfollowUser,
   getNotifications,
