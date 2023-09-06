@@ -353,7 +353,7 @@ const postSlice = createSlice({
     builder.addCase(getAllPosts.fulfilled, (state, { payload }) => {
       state.isLoading = false;
       state.isSuccess = true;
-      state.posts = payload;
+      state.posts = payload as IPost[];
     });
     builder.addCase(getAllPosts.rejected, (state, { payload }) => {
       state.isLoading = false;

@@ -6,6 +6,7 @@ import { IPostCreate } from "../../../interfaces/PostInterface";
 // Get all posts
 const getPosts = async () => {
   const response = await axios.get(POST_URL);
+console.log(response.data);
 
   return response.data;
 };
