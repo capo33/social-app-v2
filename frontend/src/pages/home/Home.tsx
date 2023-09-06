@@ -41,8 +41,8 @@ import { CommentInput } from "../../components/Index";
 import { useAppDispatch, useAppSelector } from "../../redux/app/store";
 
 export default function Home() {
-  const { posts, savedPosts } = useAppSelector((state) => state.posts);
   const { user } = useAppSelector((state) => state.auth);
+  const { posts, savedPosts } = useAppSelector((state) => state.posts);
 
   const dispatch = useAppDispatch();
 
