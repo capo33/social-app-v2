@@ -75,18 +75,12 @@ function UserProfile() {
       <CardContent
         sx={{
           display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+          alignItems: "flex-start",
+          justifyContent: "space-between",
           flexDirection: "column",
         }}
       >
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
+        <Box>
           <Avatar
             src={guest?.user?.image}
             alt={guest?.user?.username}
@@ -97,10 +91,16 @@ function UserProfile() {
               mr: 3,
             }}
           />
-          <Box component={"div"}>
-            <Typography variant='h5'>{guest?.user?.username}</Typography>
-            <Typography variant='body1'>@{guest?.user?.username}</Typography>
-
+          <Typography variant='h5' sx={{ my: 2 }}>{guest?.user?.username}</Typography>
+          <Typography variant='body1' sx={{ my: 2 }}>@{guest?.user?.username}</Typography>
+          <Box
+            component={"div"}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
             {/* Follow & UnFollow */}
             {followerMap?.includes(user?._id as string) ? (
               <Button
@@ -122,7 +122,7 @@ function UserProfile() {
           </Box>
         </Box>
 
-        <Typography variant='body2' sx={{ mb: 1 }}>
+        <Typography variant='body2' sx={{ my: 2 }}>
           {guest?.user?.bio ? `Bio: ${guest?.user?.bio}` : "No Bio"}
         </Typography>
         <Typography
