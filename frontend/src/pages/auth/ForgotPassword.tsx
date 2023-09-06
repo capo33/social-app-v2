@@ -136,7 +136,7 @@ export default function ForgotPassword() {
             type='submit'
             fullWidth
             variant='contained'
-            sx={{ mt: 3, mb: 2, backgroundColor: "cadetblue" }}
+            sx={{ mt: 3, mb: 2 }}
           >
             Reset Password
           </Button>

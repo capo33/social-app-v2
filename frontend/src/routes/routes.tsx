@@ -23,8 +23,8 @@ const routes = createBrowserRouter(
       <Route path='login' element={<Login />} />
       <Route path='register' element={<Register />} />
       <Route path='forgot-password' element={<ForgotPassword />} />
-      <Route path='profile/:id' element={<UserProfile />} />
       <Route path=':title/:id' element={<PostDetails />} />
+      <Route path='profile/:id' element={<UserProfile />} />
 
       {/* Private routes */}
       <Route path='' element={<Protect />}>

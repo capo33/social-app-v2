@@ -15,6 +15,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 // Icons
+import HomeIcon from "@mui/icons-material/Home";
 import LoginIcon from "@mui/icons-material/Login";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -22,7 +23,6 @@ import PersonIcon from "@mui/icons-material/Person";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-
 import { logout } from "../../redux/fetures/Auth/authSlice";
 import { useAppSelector, useAppDispatch } from "../../redux/app/store";
 
@@ -198,6 +198,14 @@ export default function Header() {
         </Box>
       ) : (
         <Box component={"div"}>
+          <Link to={"/"} onClick={handleClose}>
+            <MenuItem>
+              <ListItemIcon>
+                <HomeIcon />
+              </ListItemIcon>
+              Home
+            </MenuItem>
+          </Link>
           <Link to={"/login"} onClick={handleClose}>
             <MenuItem>
               <ListItemIcon>
@@ -256,6 +264,14 @@ export default function Header() {
                   </>
                 ) : (
                   <>
+                    <Link to={"/"} onClick={handleClose}>
+                      <MenuItem>
+                        <ListItemIcon>
+                          <HomeIcon />
+                        </ListItemIcon>
+                        Home
+                      </MenuItem>
+                    </Link>
                     <Link to={"/login"}>
                       <MenuItem onClick={handleClose}>
                         <ListItemIcon>

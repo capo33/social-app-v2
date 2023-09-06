@@ -1,8 +1,9 @@
 import * as React from "react";
 import Divider from "@mui/material/Divider";
-import { Grid, Typography, IconButton } from "@mui/material";
-import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
+import { Grid, Typography, IconButton, Tooltip } from "@mui/material";
+
 import BookmarkIcon from "@mui/icons-material/Bookmark";
+import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 
 import {
   getSavedPosts,
@@ -27,9 +28,9 @@ export default function Main(props: MainProps) {
 
   const token = user?.token as string;
   const postIds = savedPosts?.map((post) => post._id);
- 
+
   React.useEffect(() => {
-    dispatch(getSavedPosts({ userId: me?._id as string, token }));
+    me && dispatch(getSavedPosts({ userId: me?._id as string, token }));
   }, [dispatch, me, token]);
 
   // Save Recipe
@@ -77,7 +78,13 @@ export default function Main(props: MainProps) {
         }}
       >
         {description}
-        {postIds?.includes(p?._id as any) ? (
+        {!user ? (
+          <Tooltip title='Please loging to save the post'>
+            <IconButton>
+              <BookmarkBorderIcon sx={{ color: "black" }} />
+            </IconButton>
+          </Tooltip>
+        ) : postIds?.includes(p?._id as any) ? (
           <IconButton onClick={() => handleUnsaveRecipe(p?._id!)}>
             <BookmarkIcon sx={{ color: "black" }} />
           </IconButton>
