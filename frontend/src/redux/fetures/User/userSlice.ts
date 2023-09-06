@@ -236,7 +236,7 @@ export const userSlice = createSlice({
     builder.addCase(deleteUserProfile.fulfilled, (state, { payload }) => {
       state.isLoading = false;
       state.isSuccess = true;
-      state.user = payload;
+      state.user = null;
     });
     builder.addCase(deleteUserProfile.rejected, (state, { payload }) => {
       state.isLoading = false;

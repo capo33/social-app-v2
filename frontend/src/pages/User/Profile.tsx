@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link , useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 // Material Ui
 import {
@@ -16,11 +16,15 @@ import {
 
 // Material Icon
 import SettingsIcon from "@mui/icons-material/Settings";
- import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
-import { deleteUserProfile, userProfile } from "../../redux/fetures/User/userSlice";
+import {
+  deleteUserProfile,
+  userProfile,
+} from "../../redux/fetures/User/userSlice";
 import { getAllPosts } from "../../redux/fetures/Post/postSlice";
 import { useAppSelector, useAppDispatch } from "../../redux/app/store";
+import { logout } from "../../redux/fetures/Auth/authSlice";
 
 function Profile() {
   const { user } = useAppSelector((state) => state.auth);
@@ -43,11 +47,14 @@ function Profile() {
 
   // Delete user
   const handleDelete = () => {
-    dispatch(deleteUserProfile({
-      token,
-      toast,
-      navigate,
-    }));
+    dispatch(logout());
+    dispatch(
+      deleteUserProfile({
+        token,
+        toast,
+        navigate,
+      })
+    );
   };
   return (
     <Container sx={{ my: 10 }}>

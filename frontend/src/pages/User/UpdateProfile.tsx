@@ -3,6 +3,7 @@ import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 // Material UI
 import {
+  Avatar,
   Box,
   Button,
   Container,
@@ -32,6 +33,8 @@ const UpdateProfile = () => {
     bio: user?.bio ? user?.bio : "",
     image: user?.image ? user?.image : "",
   });
+
+  console.log(formData.image);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -89,7 +92,20 @@ const UpdateProfile = () => {
             <Box>
               <Grid container spacing={3}>
                 <Grid item sm={12}>
-                  <img src={formData?.image} alt='' style={{ width: "30%" }} />
+                  {/* {formData?.image ? (
+                    ) : (
+                    )} */}
+                  <Avatar
+                    src={formData?.image}
+                    alt={formData?.username}
+                    sx={{
+                      width: "160px",
+                      height: "160px",
+                      borderRadius: "80px",
+                      mr: 3,
+                    }}
+                  />
+                
                 </Grid>
                 <Grid item xs={12}>
                   <Button component='label' variant='outlined'>
