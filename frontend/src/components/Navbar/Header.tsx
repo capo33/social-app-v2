@@ -233,9 +233,11 @@ export default function Header() {
         <AppBar position='static'>
           <Container maxWidth='xl'>
             <Toolbar>
+              <Link to={"/"}>
               <Typography variant='h6' noWrap component='div'>
                 Social Network
               </Typography>
+              </Link>
 
               <Box sx={{ flexGrow: 1 }} />
               <Box sx={{ display: { xs: "none", md: "flex" } }}>

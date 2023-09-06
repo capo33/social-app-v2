@@ -18,6 +18,7 @@ import {
   Stack,
   Chip,
   Alert,
+  Tooltip,
 } from "@mui/material";
 
 // Material UI Icons
@@ -87,11 +88,11 @@ export default function Home() {
           Social Network <PublicIcon sx={{ fontSize: 40 }} />
         </Typography>
       </Box>
-        {posts.length === 0 && (
-          <Alert variant='outlined' severity='info'>
-            No posts yet
-          </Alert>
-        )}
+      {posts.length === 0 && (
+        <Alert variant='outlined' severity='info'>
+          No posts yet
+        </Alert>
+      )}
       <Grid container spacing={4}>
         {posts &&
           posts.map((post) => {
@@ -153,7 +154,13 @@ export default function Home() {
                   >
                     {/* Like & Unlike */}
                     <CardActions disableSpacing>
-                      {post?.likes?.includes(user?._id!) ? (
+                      {!user ? (
+                        <Tooltip title='Please loging to like the post'>
+                          <IconButton>
+                            <FavoriteBorderIcon sx={{ color: "black" }} />
+                          </IconButton>
+                        </Tooltip>
+                      ) : post?.likes?.includes(user?._id!) ? (
                         <IconButton
                           aria-label='unlike'
                           onClick={() => handleUnlike(post?._id!)}
@@ -165,7 +172,7 @@ export default function Home() {
                           aria-label='like'
                           onClick={() => handleLike(post?._id!)}
                         >
-                          <FavoriteBorderIcon />
+                          <FavoriteBorderIcon sx={{ color: "black" }} />
                         </IconButton>
                       )}
                     </CardActions>

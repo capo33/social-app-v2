@@ -67,11 +67,10 @@ export default function Login() {
   };
 
   return (
-    <Container maxWidth='md'>
+    <Container maxWidth='lg' sx={{ my: 10 }}>
       <CssBaseline />
       <Box
         sx={{
-          marginTop: 8,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",

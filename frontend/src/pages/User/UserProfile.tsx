@@ -11,6 +11,7 @@ import {
   Button,
   CardContent,
   Divider,
+  Tooltip,
 } from "@mui/material";
 
 // Material Icon
@@ -91,8 +92,12 @@ function UserProfile() {
               mr: 3,
             }}
           />
-          <Typography variant='h5' sx={{ my: 2 }}>{guest?.user?.username}</Typography>
-          <Typography variant='body1' sx={{ my: 2 }}>@{guest?.user?.username}</Typography>
+          <Typography variant='h5' sx={{ my: 2 }}>
+            {guest?.user?.username}
+          </Typography>
+          <Typography variant='body1' sx={{ my: 2 }}>
+            @{guest?.user?.username}
+          </Typography>
           <Box
             component={"div"}
             sx={{
@@ -102,7 +107,13 @@ function UserProfile() {
             }}
           >
             {/* Follow & UnFollow */}
-            {followerMap?.includes(user?._id as string) ? (
+            {!user ? (
+              <Tooltip title='Please login to follow'>
+                <Button variant='contained' color='primary'>
+                  Follow
+                </Button>
+              </Tooltip>
+            ) : followerMap?.includes(user?._id as string) ? (
               <Button
                 variant='contained'
                 color='primary'

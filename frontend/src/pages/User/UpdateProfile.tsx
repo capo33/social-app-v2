@@ -34,8 +34,6 @@ const UpdateProfile = () => {
     image: user?.image ? user?.image : "",
   });
 
-  console.log(formData.image);
-
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -92,9 +90,6 @@ const UpdateProfile = () => {
             <Box>
               <Grid container spacing={3}>
                 <Grid item sm={12}>
-                  {/* {formData?.image ? (
-                    ) : (
-                    )} */}
                   <Avatar
                     src={formData?.image}
                     alt={formData?.username}
@@ -105,7 +100,6 @@ const UpdateProfile = () => {
                       mr: 3,
                     }}
                   />
-                
                 </Grid>
                 <Grid item xs={12}>
                   <Button component='label' variant='outlined'>
