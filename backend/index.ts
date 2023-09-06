@@ -1,4 +1,5 @@
 import dotenv from "dotenv";
+import path from "path";
 import express, { Application, Request, Response } from "express";
 import cookieParser from "cookie-parser";
 
@@ -29,12 +30,23 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cookieParser());
 
-// Welcom route
-app.get("/", (req: Request, res: Response) => {
-  res.json({
-    message: "API is running...",
+// Make uploads folder static
+if (process.env.NODE_ENV === "production") {
+  const __dirname: string = path.resolve();
+  app.use(express.static(path.join(__dirname, "/frontend/build")));
+
+  // for any route that is not api, redirect to index.html
+  app.get("*", (req: Request, res: Response) =>
+    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"))
+  );
+} else {
+  // Welcome route
+  app.get("/", (req: Request, res: Response) => {
+    res.json({
+      message: "API is running...",
+    });
   });
-});
+}
 
 // Routes
 
